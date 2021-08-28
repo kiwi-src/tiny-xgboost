@@ -19,12 +19,14 @@ if __name__ == '__main__':
     print("TRAINING")
     if large:
         n_estimators = 1
-        learner = Learner(objectives.SquaredError(), n_estimators=n_estimators, vectorized=True,
+        objective = objectives.SquaredError()
+        learner = Learner(objective, n_estimators=n_estimators, vectorized=True,
                           max_depth=6, base_score=0.5)
 
     else:
         n_estimators = 1
-        learner = Learner(objectives.SquaredError(), n_estimators=n_estimators, vectorized=False,
+        objective = objectives.SquaredError()
+        learner = Learner(objective, n_estimators=n_estimators, vectorized=False,
                           max_depth=3, base_score=0.5)
 
     start_time = time.time()
@@ -40,7 +42,7 @@ if __name__ == '__main__':
     print(predictions)
 
     print("\nLOSS (TEST SET)")
-    loss = loss_function.loss(test_labels, np.asarray(predictions))
+    loss = objective.loss(test_labels, np.asarray(predictions))
     print(loss)
 
     print("\nRMSE (TEST SET)")
