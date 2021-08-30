@@ -95,7 +95,7 @@ class XgboostTest(unittest.TestCase):
         labels = np.asarray([1, 0])
         learner = Learner(objective, vectorized=vectorized, n_estimators=1,
                           max_depth=6, base_score=0.5)
-        self.compare(instances, labels, 0.25, learner)
+        self.compare(instances, labels, 0.125, learner)
 
         instances = np.asarray([[1], [1]])
         labels = np.asarray([0, 0])
@@ -131,7 +131,7 @@ class XgboostTest(unittest.TestCase):
         labels = np.asarray([1, 0, 1, 0])
         learner = Learner(objective, vectorized=vectorized, n_estimators=1,
                           max_depth=6, base_score=0.5)
-        self.compare(instances, labels, 0.25, learner)
+        self.compare(instances, labels, 0.0625, learner)
 
         instances = np.asarray(
             [[0.644, .247, -0.447], [0.385, 1.8, 1.037], [1.214, -0.166, 0.004]])
@@ -151,21 +151,21 @@ class XgboostTest(unittest.TestCase):
         labels = np.asarray([1, 0, 1, 0])
         learner = Learner(objective, vectorized=vectorized, n_estimators=1,
                           max_depth=0, base_score=0.5)
-        self.compare(instances, labels, 0.5, learner)
+        self.compare(instances, labels, 0.125, learner)
 
         # depth 1
         instances = np.asarray([[1.0], [2.0], [3.0], [4.0]])
         labels = np.asarray([1, 0, 1, 0])
         learner = Learner(objective, vectorized=vectorized, n_estimators=1,
                           max_depth=1, base_score=0.5)
-        self.compare(instances, labels, 0.33333333333333337, learner)
+        self.compare(instances, labels, 0.08333333333333334, learner)
 
         # depth 2
         instances = np.asarray([[1.0], [2.0], [3.0], [4.0]])
         labels = np.asarray([1, 0, 1, 0])
         learner = Learner(objective, vectorized=vectorized, n_estimators=1,
                           max_depth=2, base_score=0.5)
-        self.compare(instances, labels, 0.25, learner)
+        self.compare(instances, labels, 0.0625, learner)
 
     def n_estimators_tests(self, vectorized):
         # Squared error
@@ -180,13 +180,13 @@ class XgboostTest(unittest.TestCase):
                           max_depth=1, base_score=0.5)
         instances = np.asarray([[1.0], [2.0], [3.0], [4.0]])
         labels = np.asarray([1, 0, 1, 0])
-        self.compare(instances, labels, expected_loss=0.25925925925925924, learner=learner)
+        self.compare(instances, labels, expected_loss=0.06481481481481481, learner=learner)
 
         learner = Learner(objective, vectorized=vectorized, n_estimators=3,
                           max_depth=1, base_score=0.5)
         instances = np.asarray([[1.0], [2.0], [3.0], [4.0]])
         labels = np.asarray([1, 0, 1, 0])
-        self.compare(instances, labels, expected_loss=0.10493827160493828, learner=learner)
+        self.compare(instances, labels, expected_loss=0.02623456790123457, learner=learner)
 
         # Binary cross entropy
         learner = Learner(objectives.BinaryCrossentropy(), vectorized=vectorized, n_estimators=3,

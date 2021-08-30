@@ -7,7 +7,7 @@ from tiny_xgboost import objectives
 from tiny_xgboost.learner import Learner
 
 if __name__ == '__main__':
-    large = True
+    large = False
     if large:
         train_inputs, test_inputs, train_labels, test_labels = utils.load_data()
     else:
@@ -30,7 +30,7 @@ if __name__ == '__main__':
                           max_depth=3, base_score=0.5)
 
     start_time = time.time()
-    learner.fit(train_inputs, train_labels)
+    learner.fit(train_set=(train_inputs, train_labels), eval_set=(test_inputs, test_labels))
     end_time = time.time()
 
     print("\nTREE")
