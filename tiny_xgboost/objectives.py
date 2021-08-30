@@ -28,21 +28,26 @@ class BinaryCrossentropy(Objective):
     def gradients(self, labels, probs):
         # Derivative of -(y * log(1/(1+exp(-w))) + (1.0 - y) * log(1.0 - 1/(1+exp(-w)))) wrt w
         # probs = 1/(1+exp(-w))
-        return probs - labels
+        # XGBoost doesn't multiply with 1/len(labels)
+        return probs - labels  # * 1/len(labels)
 
     def hessians(self, labels, probs):
         # Derivative of probs - labels wrt w
         # probs = 1/(1+exp(-w))
-        return probs * (1 - probs)
+        # XGBoost doesn't multiply with 1/len(labels)
+        return probs * (1 - probs)  # * 1/len(labels)
 
 
 class SquaredError(Objective):
 
     def loss(self, labels, predictions):
-        return 0.5 * np.sum(np.square(labels - predictions))
+        # In order to compare the loss of different datasets the mean is computed
+        return 0.5 * np.mean(np.square(labels - predictions))
 
     def gradients(self, labels, logits):
-        return -(labels - logits)
+        # XGBoost doesn't multiply with 1/len(labels)
+        return -(labels - logits)  # * 1/len(labels)
 
     def hessians(self, labels, predictions):
-        return np.full(len(labels), 1)
+        # XGBoost doesn't multiply with 1/len(labels)
+        return np.full(len(labels), 1)  # * 1/len(labels)
