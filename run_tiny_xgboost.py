@@ -7,7 +7,7 @@ from tiny_xgboost import objectives
 from tiny_xgboost.learner import Learner
 
 if __name__ == '__main__':
-    large = False
+    large = True
     if large:
         train_inputs, test_inputs, train_labels, test_labels = utils.load_data()
     else:
@@ -18,11 +18,10 @@ if __name__ == '__main__':
 
     print("TRAINING")
     if large:
-        n_estimators = 1
+        n_estimators = 2
         objective = objectives.SquaredError()
         learner = Learner(objective, n_estimators=n_estimators, vectorized=True,
                           max_depth=6, base_score=0.5)
-
     else:
         n_estimators = 1
         objective = objectives.SquaredError()
@@ -37,9 +36,9 @@ if __name__ == '__main__':
     dump = learner.get_dump()[n_estimators - 1]
     print(dump)
 
-    print("\nPREDICTIONS")
+    print("\nPREDICTIONS (EXAMPLE)")
     predictions = learner.predict(test_inputs)
-    print(predictions)
+    print(predictions[0:4])
 
     print("\nLOSS (TEST SET)")
     loss = objective.loss(test_labels, np.asarray(predictions))

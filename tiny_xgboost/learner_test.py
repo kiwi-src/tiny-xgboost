@@ -2,8 +2,8 @@ import unittest
 
 import numpy as np
 
-from tiny_xgboost.learner import Learner
 from tiny_xgboost import objectives
+from tiny_xgboost.learner import Learner
 
 
 class XgboostTest(unittest.TestCase):
@@ -26,9 +26,8 @@ class XgboostTest(unittest.TestCase):
     def test_n_estimators_non_vectorized(self):
         self.n_estimators_tests(False)
 
-    def compare(self, instances, labels,
-                expected_loss, learner):
-        learner.fit(instances, labels)
+    def compare(self, instances, labels, expected_loss, learner):
+        learner.fit(train_set=(instances, labels))
         predictions = learner.predict(instances)
         loss = learner.loss(labels, np.asarray(predictions))
         self.assertAlmostEqual(expected_loss, loss)

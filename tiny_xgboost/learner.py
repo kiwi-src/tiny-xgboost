@@ -20,8 +20,10 @@ class Learner:
         self._epsilon = 1e-6
         self._min_child_weight = min_child_weight
 
-    def fit(self, instances, labels):
-        predictions = np.full(len(labels), self._base_score)
+    def fit(self, train_set, eval_set=None):
+        instances_train = train_set[0]
+        labels_train = train_set[1]
+        predictions = np.full(len(labels_train), self._base_score)
         for i in range(self._n_estimators):
             tree = Tree(self._objective,
                         vectorized=self._vectorized,
@@ -30,11 +32,18 @@ class Learner:
                         epsilon=self._epsilon,
                         min_child_weight=self._min_child_weight
                         )
-            tree.split(instances, labels, initial_predictions=predictions)
+            tree.split(instances_train, labels_train, initial_predictions=predictions)
             self._trees.append(tree)
-            predictions = self.predict(instances)
-            loss = self._objective.loss(labels, predictions)
-            print(f'[{i}] loss:{loss}')
+            predictions = self.predict(instances_train)
+            train_loss = self._objective.loss(labels_train, predictions)
+
+            if eval_set is None:
+                print(f'[{i}] train_loss:{train_loss:.5f}')
+            else:
+                instances_eval = eval_set[0]
+                labels_eval = eval_set[1]
+                eval_loss = self._objective.loss(labels_eval, self.predict(instances_eval))
+                print(f'[{i}] train_loss:{train_loss:.5f}\teval_loss:{eval_loss:.5f}')
 
     def predict(self, instances):
         if isinstance(self._objective, BinaryCrossentropy):
