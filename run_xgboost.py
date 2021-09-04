@@ -43,9 +43,13 @@ if __name__ == '__main__':
     dump = booster.get_dump(fmap='')[best_iteration]
     print(dump)
 
-    print("\nRMSE (TEST SET)")
+    print("\nRMSE (Test)")
     predictions = model.predict(test_inputs)
     print(utils.rmse(predictions, test_labels))
+
+    print("\nRMSE (Train)")
+    predictions = model.predict(train_inputs)
+    print(utils.rmse(predictions, train_labels))
 
     print("\nEXECUTION TIME")
     print(end_time - start_time)

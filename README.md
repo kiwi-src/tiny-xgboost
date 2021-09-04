@@ -11,11 +11,11 @@ For comparing the performance of XGBoost with tiny-xgboost the regression datase
 were used:
 https://github.com/Microsoft/LightGBM/tree/master/examples/regression
 
-|  | RMSE | Execution Time
-| ------------- | ------------- | ------------- |
-| XGBoost (C++) | 0.44484 | 0.069
-| tiny-xgboost (non-vectorized) | 0.44484 | 6.361
-| tiny-xgboost (vectorized) | 0.44484 | 0.1314
+|  | RMSE (Train) | RMSE (Test) | Execution Time
+| ------------- | ------------- | ------------- | ------------- |
+| XGBoost (C++) | 0.43059 | 0.44484 | 0.069
+| tiny-xgboost (non-vectorized) | 0.43059 | 0.44484 | 6.361
+| tiny-xgboost (vectorized) | 0.43059 | 0.44484 | 0.1314
 
 The results can be reproduced by running the command
 ```
