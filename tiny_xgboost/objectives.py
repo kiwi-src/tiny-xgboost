@@ -44,9 +44,9 @@ class SquaredError(Objective):
         # In order to compare the loss of different datasets the mean is computed
         return 0.5 * np.mean(np.square(labels - predictions))
 
-    def gradients(self, labels, logits):
+    def gradients(self, labels, predictions):
         # XGBoost doesn't multiply with 1/len(labels)
-        return -(labels - logits)  # * 1/len(labels)
+        return -(labels - predictions)  # * 1/len(labels)
 
     def hessians(self, labels, predictions):
         # XGBoost doesn't multiply with 1/len(labels)
