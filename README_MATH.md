@@ -5,12 +5,12 @@
 ### Algorithm
 
 In order to find the optimal weight `w_next` XGBoost minimizes the following loss function:
-```
+```Python
 loss_sum(labels, w_last + w_next)
 ```
 
 Where the loss is defined as follows:
-```
+```Python
 def loss_sum(labels, logit):
     prob = sigmoid(logit)
     loss_sum = 0.0
@@ -26,7 +26,7 @@ f(x) ≈ f(a) + g(a) * (x-a) + 0.5 * h(a) * pow((x-a), 2)
 
 Rewriting the binary cross entropy loss function as a taylor series yields
 
-```
+```Python
 loss_last = loss_sum(labels, w_last)
 g = sum_gradients(labels, w_last)
 h = sum_hessians(labels, w_last)
@@ -37,12 +37,12 @@ loss = loss_last + g * w_next + 0.5 * h * pow(w_next, 2)
 ```
 
 The derivative of the taylor loss is
-```
+```Python
 g * h * w_next
 ```
 
 For the root of the derivative follows
-```
+```Python
 g * h * w_next = 0
 w_next = -g/h
 ```
@@ -54,7 +54,7 @@ A distinction could be made between 3 cases:
 * Mixture of 0 and 1 labels
 
 #### All labels are 0
-```
+```Python
 w_last = 0.4
 labels = [0]
 ```
@@ -65,7 +65,7 @@ In case all labels are 0 there is no minima.
 
 #### All labels are 1
 
-```
+```Python
 w_last = 0.4
 labels = [1]
 ```
@@ -76,23 +76,23 @@ In case all labels are 0 there is no minima.
 #### Mixture of 0 and 1 labels
 In case there is a mixture of 0 and 1 labels there a minima exists.
 
-```
+```Python
 w_last = 0.4
 labels = [0, 1]
 ```
 ![](images/label_0_1.png)
 
 ## Newton method
-```
-w_last = 0.4
-labels = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-```
-
 In order to find the minima of a loss function XGBoost uses the [Newton method](https://en.wikipedia.org/wiki/Newton%27s_method_in_optimization).
 
 The Newton method uses a sequence of second-order approximations of the loss function around the iterates (`w_last`).
 
 ### Example
+```Python
+w_last = 0.4
+labels = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+```
+
 After the first iteration the minima of the exact loss function deviates from
 the minima of the taylor series.
 ![](images/iteration_1.png)
