@@ -12,15 +12,20 @@ loss_sum(labels, w_last + w_next)
 Where the loss is defined as follows:
 ```Python
 def loss_sum(labels, logit):
-    prob = sigmoid(logit)
     loss_sum = 0.0
     for label in labels:
-        loss_sum += loss(label, prob)
+        loss_sum += loss(label, logit)
     return loss_sum
 ```
 
-I general the second order Taylor series looks as follows (where `g` is the first derivative and `h` the second derivative)
+```Python
+def loss(label, logit):
+    prob = sigmoid(logit)
+    return -(label * np.log(prob) + (1.0 - label) * np.log(1.0 - prob))
 ```
+
+I general the second order Taylor series looks as follows (where `g` is the first derivative and `h` the second derivative)
+```Python
 f(x) ≈ f(a) + g(a) * (x-a) + 0.5 * h(a) * pow((x-a), 2)
 ```
 
