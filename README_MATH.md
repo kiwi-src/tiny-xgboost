@@ -24,7 +24,7 @@ def loss(label, logit):
     return -(label * np.log(prob) + (1.0 - label) * np.log(1.0 - prob))
 ```
 
-I general the second order Taylor series looks as follows (where `g` is the first derivative and `h` the second derivative)
+In general the second order Taylor series looks as follows (where `g` is the first derivative and `h` the second derivative)
 ```Python
 f(x) ≈ f(a) + g(a) * (x-a) + 0.5 * h(a) * pow((x-a), 2)
 ```
