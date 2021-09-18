@@ -101,7 +101,7 @@ for i in range(num_iterations):
     w_optimal += t
     w_last = w_last + t
 ```
-Each iteration of the XGBoost only performs one iteration in order to compute `w_optimal`. 
+Each iteration in XGBoost only performs one Newton iteration for computing `w_optimal`. 
 
 ### Example
 ```Python
