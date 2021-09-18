@@ -94,8 +94,8 @@ The Newton method uses a sequence of second-order approximations of the loss fun
 
 ### Example
 ```Python
-w_last = 0.4
-labels = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+w_last = [-1.42785195 -2.04789617 -1.33124088 -0.24409868 -1.07399676]
+labels = [0, 1, 1, 1, 1]
 ```
 
 After the first iteration the minima of the exact loss function deviates from
