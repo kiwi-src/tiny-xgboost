@@ -60,32 +60,32 @@ A distinction could be made between 3 cases:
 
 #### All labels are 0
 ```Python
-w_last = 0.4
-labels = [0]
+w_last = [-1.42785195 -2.04789617]
+labels = [0, 0]
 ```
 
 In case all labels are 0 there is no minima.
 
-![](images/label_0.png)
+<img src="images/labels_0_0.gif" width="50%"/>
 
 #### All labels are 1
 
 ```Python
-w_last = 0.4
-labels = [1]
+w_last = [-1.42785195 -2.04789617]
+labels = [1, 1]
 ```
 In case all labels are 0 there is no minima.
 
-![](images/label_1.png)
+<img src="images/labels_1_1.gif" width="50%"/>
 
 #### Mixture of 0 and 1 labels
 In case there is a mixture of 0 and 1 labels there a minima exists.
 
 ```Python
-w_last = 0.4
+w_last = [-1.42785195 -2.04789617]
 labels = [0, 1]
 ```
-![](images/label_0_1.png)
+<img src="images/labels_0_1.gif" width="50%"/>
 
 ## Newton method
 In order to find the minima of a loss function XGBoost uses the [Newton method](https://en.wikipedia.org/wiki/Newton%27s_method_in_optimization).
@@ -100,8 +100,8 @@ labels = [0, 1, 1, 1, 1]
 
 After the first iteration the minima of the exact loss function deviates from
 the minima of the taylor series.
-<img src="images/iteration_1.png" alt="drawing" width="50%"/>
+<img src="images/iteration_1.png" width="50%"/>
 
 With every iteration the minima of the taylor series moves closer to the minima
 of the exact loss function:
-<img src="images/newton.gif" alt="drawing" width="50%"/>
+<img src="images/newton.gif" width="50%"/>
