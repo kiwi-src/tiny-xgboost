@@ -66,7 +66,7 @@ labels = [0, 0]
 
 In case all labels are 0 there is no minima.
 
-<img src="images/labels_0_0.gif" width="50%"/>
+<img src="images/labels_0_0.png" width="50%"/>
 
 #### All labels are 1
 
@@ -76,7 +76,7 @@ labels = [1, 1]
 ```
 In case all labels are 0 there is no minima.
 
-<img src="images/labels_1_1.gif" width="50%"/>
+<img src="images/labels_1_1.png" width="50%"/>
 
 #### Mixture of 0 and 1 labels
 In case there is a mixture of 0 and 1 labels there a minima exists.
@@ -85,7 +85,7 @@ In case there is a mixture of 0 and 1 labels there a minima exists.
 w_last = [-1.42785195 -2.04789617]
 labels = [0, 1]
 ```
-<img src="images/labels_0_1.gif" width="50%"/>
+<img src="images/labels_0_1.png" width="50%"/>
 
 ## Newton method
 In order to find the minima of a loss function XGBoost uses the [Newton method](https://en.wikipedia.org/wiki/Newton%27s_method_in_optimization).
