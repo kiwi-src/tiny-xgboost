@@ -100,7 +100,8 @@ labels = [0, 1, 1, 1, 1]
 
 After the first iteration the minima of the exact loss function deviates from
 the minima of the taylor series.
-![](images/iteration_1.png)
+![](images/iteration_1.png )
+<img src="images/iteration_1.png" alt="drawing" width="50%"/>
 
 With every iteration the minima of the taylor series moves closer to the minima
 of the exact loss function:
