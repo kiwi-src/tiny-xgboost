@@ -65,7 +65,7 @@ w_last = [-1.42785195 -2.04789617]
 labels = [0, 0]
 ```
 
-In case all labels are 0 there is no minima.
+In case all labels are 0 the loss is minimized by choosing an infinite small weight.
 
 <img src="images/labels_0_0.png" width="50%"/>
 
@@ -75,7 +75,7 @@ In case all labels are 0 there is no minima.
 w_last = [-1.42785195 -2.04789617]
 labels = [1, 1]
 ```
-In case all labels are 0 there is no minima.
+In case all labels are 1 the loss is minimized by choosing an infinite large weight.
 
 <img src="images/labels_1_1.png" width="50%"/>
 
