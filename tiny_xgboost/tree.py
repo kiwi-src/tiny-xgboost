@@ -28,7 +28,7 @@ class Tree:
             split_finder = SplitFinderNonVec(epsilon=self._epsilon,
                                              min_child_weight=self._min_child_weight)
 
-        self._root = Node(split_finder.calc_weight(gradients, hessians), self._max_depth)
+        self._root = Node(self._max_depth)
         self._root.split(split_finder, instances, gradients, hessians, self._vectorized, depth=0)
 
     def predict(self, instance):
@@ -63,7 +63,6 @@ class Tree:
             dump.append(f'{node}')
         if node.left_child is not None:
             dump.extend(self._get_dump(node.left_child, depth + 1, end + [False]))
-
         if node.right_child is not None:
             dump.extend(self._get_dump(node.right_child, depth + 1, end + [True]))
         return dump

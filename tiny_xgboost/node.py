@@ -1,12 +1,11 @@
 class Node:
 
-    def __init__(self, weight, max_depth):
+    def __init__(self, max_depth):
         self.left_child = None
         self.right_child = None
         self.split_value = None
         self.feature_index = None
         self.is_leaf = None
-        self.weight = weight
         self._max_depth = max_depth
 
     def __str__(self):
@@ -19,6 +18,7 @@ class Node:
 
         if depth == self._max_depth:
             self.is_leaf = True
+            self.weight = split_finder.calc_weight(gradients, hessians)
             return
 
         if vectorized:
@@ -30,19 +30,14 @@ class Node:
 
         if split_value is None:
             self.is_leaf = True
+            self.weight = split_finder.calc_weight(gradients, hessians)
             return
-
         else:
             # Init new node
             self.split_value = split_value
             self.feature_index = feature_index
-            left_weight = split_finder.calc_weight(gradients[best_indexes_lt],
-                                                   hessians[best_indexes_lt])
-            self.left_child = Node(left_weight, self._max_depth)
-
-            right_weight = split_finder.calc_weight(gradients[best_indexes_ge],
-                                                    hessians[best_indexes_ge])
-            self.right_child = Node(right_weight, self._max_depth)
+            self.left_child = Node(self._max_depth)
+            self.right_child = Node(self._max_depth)
 
         # value < split_value
         self.left_child.split(
