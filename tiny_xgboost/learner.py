@@ -32,7 +32,7 @@ class Learner:
                         epsilon=self._epsilon,
                         min_child_weight=self._min_child_weight
                         )
-            tree.split(instances_train, labels_train, initial_predictions=predictions)
+            tree.split(instances_train, labels_train, last_predictions=predictions)
             self._trees.append(tree)
             predictions = self.predict(instances_train)
             train_loss = self._objective.loss(labels_train, predictions)

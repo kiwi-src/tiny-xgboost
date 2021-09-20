@@ -17,9 +17,9 @@ class Tree:
         self._epsilon = epsilon
         self._min_child_weight = min_child_weight
 
-    def split(self, instances, labels, initial_predictions):
-        gradients = self._objective.gradients(labels, initial_predictions)
-        hessians = self._objective.hessians(labels, initial_predictions)
+    def split(self, instances, labels, last_predictions):
+        gradients = self._objective.gradients(labels, last_predictions)
+        hessians = self._objective.hessians(labels, last_predictions)
 
         if self._vectorized is True:
             split_finder = SplitFinderVec(epsilon=self._epsilon,
